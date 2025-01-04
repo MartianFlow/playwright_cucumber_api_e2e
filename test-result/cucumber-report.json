@@ -1,0 +1,237 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-page-validation;login-page-with-valid-username-and-password",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "login page with valid username and password",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 83640583
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 11,
+            "name": "providing valid url for login",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 727588250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "providing valid email as \"test2@email.com\" and password as \"Tester1225\"",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 242968207
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "clicking login button",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24338875
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 184499
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 9
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-page-validation",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "login page validation",
+    "tags": [],
+    "uri": "src/test/features/login.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-with-scenario-outlines;valid-with-two-different-users",
+        "keyword": "Scenario Outline",
+        "line": 11,
+        "name": "valid with two different users",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 73692292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "providing valid url for login",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 734403292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "providing valid email as \"test@email.com\" and password as \"Tester12\"",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 305142083
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "clicking login button",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23135042
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 120333
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "login-with-scenario-outlines;valid-with-two-different-users",
+        "keyword": "Scenario Outline",
+        "line": 12,
+        "name": "valid with two different users",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 53824833
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "providing valid url for login",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 790719541
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "providing valid email as \"test2@email.com\" and password as \"Tester1225\"",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 197689875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "clicking login button",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26002290
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 121500
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-with-scenario-outlines",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "login with scenario outlines",
+    "tags": [],
+    "uri": "src/test/features/loginScenario.feature"
+  }
+]
