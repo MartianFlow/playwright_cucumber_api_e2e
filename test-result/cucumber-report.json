@@ -4,6 +4,172 @@
     "elements": [
       {
         "description": "",
+        "id": "user-authentication;user-logs-in-via-the-api-and-the-access-token-is-saved-in-the-authentication-file",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "User logs in via the API and the access token is saved in the authentication file",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 72161332
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "the user provides valid API credentials with email \"test2@email.com\" and password \"Tester1225\"",
+            "match": {
+              "location": "src/test/steps/authSteps.ts:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 382529250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "the user sends a login request to the authentication API",
+            "match": {
+              "location": "src/test/steps/authSteps.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1058292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "the user should receive a valid access token",
+            "match": {
+              "location": "src/test/steps/authSteps.ts:17"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 735249
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "the access token should be saved in the authentication file",
+            "match": {
+              "location": "src/test/steps/authSteps.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1332290
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 209375
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@apitest",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "user-authentication",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "User Authentication",
+    "tags": [],
+    "uri": "src/test/features/auth.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-page-validation;login-page-with-valid-username-and-password",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "login page with valid username and password",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 87909292
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "providing valid url for login",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 884172875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 6,
+            "name": "providing valid email and password",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 237198790
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "clicking login button",
+            "match": {
+              "location": "src/test/steps/loginSteps.ts:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20614958
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 167458
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@regression",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
         "id": "login-page-validation;login-page-with-valid-username-and-password",
         "keyword": "Scenario",
         "line": 10,
@@ -14,7 +180,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 83640583
+              "duration": 73364874
             }
           },
           {
@@ -27,7 +193,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 727588250
+              "duration": 1123598834
             }
           },
           {
@@ -40,7 +206,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 242968207
+              "duration": 199746124
             }
           },
           {
@@ -53,7 +219,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 24338875
+              "duration": 23112999
             }
           },
           {
@@ -61,7 +227,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 184499
+              "duration": 180499
             }
           }
         ],
@@ -96,7 +262,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 73692292
+              "duration": 58311166
             }
           },
           {
@@ -109,7 +275,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 734403292
+              "duration": 1020785041
             }
           },
           {
@@ -122,7 +288,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 305142083
+              "duration": 97239166
             }
           },
           {
@@ -135,7 +301,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 23135042
+              "duration": 20769958
             }
           },
           {
@@ -143,7 +309,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 120333
+              "duration": 167332
             }
           }
         ],
@@ -167,7 +333,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 53824833
+              "duration": 51517459
             }
           },
           {
@@ -180,7 +346,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 790719541
+              "duration": 1018576833
             }
           },
           {
@@ -193,7 +359,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 197689875
+              "duration": 93064583
             }
           },
           {
@@ -206,7 +372,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 26002290
+              "duration": 22596249
             }
           },
           {
@@ -214,7 +380,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 121500
+              "duration": 144041
             }
           }
         ],

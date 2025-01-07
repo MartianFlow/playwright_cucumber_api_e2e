@@ -736,21 +736,21 @@ input#darkCheck:checked ~ label>svg#moon {
                     
                         <i class="fa fa-tag fa-lg"></i>
                         
-                            <span class="tag">@smoke</span>
+                            <span class="tag">@apitest</span>
                         
                     
                 
             </div>
             <h1>Feature:
-                <small>login page validation</small>
+                <small>User Authentication</small>
             </h1>
             
                 <p>
                <p><strong>File name:</strong>
-                    login.feature
+                    auth.feature
                 </p>
                 <p><strong>Relative path:</strong>
-                    features/login.feature</p>
+                    features/auth.feature</p>
             
         </div>
 
@@ -938,13 +938,13 @@ input#darkCheck:checked ~ label>svg#moon {
                         
                             <i class="fa fa-tag fa-lg"></i>
                             
-                                <span class="tag">@smoke</span>
+                                <span class="tag">@apitest</span>
                             
                         
                     
                 </div>
 
-                <h2>Scenario: <small>login page with valid username and password</small></h2>
+                <h2>Scenario: <small>User logs in via the API and the access token is saved in the authentication file</small></h2>
 
                 <ul class="nav navbar-right panel_toolbox">
                     <li>
@@ -961,7 +961,7 @@ input#darkCheck:checked ~ label>svg#moon {
 
                     
                         <li>
-                            <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">3</span>
+                            <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">4</span>
                         </li>
                     
 
@@ -993,7 +993,7 @@ input#darkCheck:checked ~ label>svg#moon {
                                     <span class="keyword highlight">Given </span>
 
                                     
-                                        providing valid url for login
+                                        the user provides valid API credentials with email "test2@email.com" and password "Tester1225"
                                         
                                     
 
@@ -1053,7 +1053,7 @@ input#darkCheck:checked ~ label>svg#moon {
                                     <span class="keyword highlight">When </span>
 
                                     
-                                        providing valid email as "test2@email.com" and password as "Tester1225"
+                                        the user sends a login request to the authentication API
                                         
                                     
 
@@ -1113,7 +1113,67 @@ input#darkCheck:checked ~ label>svg#moon {
                                     <span class="keyword highlight">Then </span>
 
                                     
-                                        clicking login button
+                                        the user should receive a valid access token
+                                        
+                                    
+
+                                    
+
+                                </div>
+
+                                
+                                    
+
+                                    
+
+                                    
+                                    
+                                    
+
+                                    
+
+                                    
+
+                                    
+                                
+                            </div>
+
+                        
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+
+                            
+                        
+
+                        
+                            
+                        
+
+                    
+                
+                        
+                            <div class="scenario-step-container">
+
+                                
+                                    
+                                        <div class="label" title="Success">
+                                            <i class="fa fa-check-circle fa-2x passed-color" data-toggle="tooltip" data-placement="top" title="Step passed"></i>
+                                        </div>
+                                    
+                                
+
+                                <div class="text">
+                                    <span class="keyword highlight">And </span>
+
+                                    
+                                        the access token should be saved in the authentication file
                                         
                                     
 

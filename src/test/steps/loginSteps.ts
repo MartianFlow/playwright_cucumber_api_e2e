@@ -13,7 +13,7 @@ Given('providing valid url for login',async function () {
     await navigatePage.goToPage(loginPath);
   });
 
-  When('providing valid username and password',async function () {
+  When('providing valid email and password',async function () {
     const username = process.env.USER;
     const password = process.env.PASSWORD;
     await loginPage.enterUserNameAndPassword(username, password);
