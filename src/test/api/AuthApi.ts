@@ -29,8 +29,7 @@ export default class AuthApi {
                 throw new Error('Access token not found in the response');
             }
 
-            const accessToken = response.data.user.token;
-            return accessToken;
+            return response.data.user.token;
 
         } catch (error) {
             throw new Error(`Failed to authenticate: ${error.response ? error.response.status : error.message}`);

@@ -27,10 +27,11 @@ export default class CreateArticleApi {
                     description,
                     body,
                     "tagList":[]
-                }, {
+                }
+            }, {
                 headers: {
                     'Authorization': `Bearer ${value}`
-                },
+                }
             });
 
             if (!response.data || !response.data.article || !response.data.article.slug) {

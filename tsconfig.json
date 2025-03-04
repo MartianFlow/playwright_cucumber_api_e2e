@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
-        "typeRoots": [
-            "./node_modules/@types",
-            "src/test/Helper/types/env.d.ts"
-        ]
+      "target": "es6",
+      "module": "commonjs",
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "typeRoots": ["./node_modules/@types", "src/test/Helper/types/env.d.ts"]
     }
 }
