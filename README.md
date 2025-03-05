@@ -31,6 +31,7 @@ jorgeo452-playwright_cucumber_e2e/
 │       ├── Helper/
 │       │   ├── browsers.ts        # Browser launch configuration
 │       │   ├── init.ts            # Test setup (e.g., directory cleanup)
+│       │   ├── uploadToXray.ts    # Uploads test results to Xray
 │       │   ├── env/
 │       │   │   ├── env.ts          # Environment variable loading
 │       │   │   └── .env.test      # Test environment variables
@@ -107,7 +108,7 @@ jorgeo452-playwright_cucumber_e2e/
 - **Run tests with specific tags:**
 
   ```bash
-  TAGS="@default" npm test  # set the TAGS environment variable to run tests with the @default tag
+  TAGS="@default" npm test  # set the 'TAGS' environment variable to run tests with the required tag
   
   TAGS="@regression and not @apitest" npm test # Run tests with @regression but not @apitest
   ```
