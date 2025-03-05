@@ -107,8 +107,9 @@ jorgeo452-playwright_cucumber_e2e/
 - **Run tests with specific tags:**
 
   ```bash
-  npm test -- --tags "@smoke"  # Run tests with the @smoke tag
-  npm test -- --tags "@regression and not @apitest" # Run tests with @regression but not @apitest
+  TAGS="@default" npm test  # set the TAGS environment variable to run tests with the @default tag
+  
+  TAGS="@regression and not @apitest" npm test # Run tests with @regression but not @apitest
   ```
 
 - **Run failed tests (rerun):**
