@@ -1,6 +1,5 @@
 {
     "default":{
-        "tags": "@e2e",
         "formatOptions":{
             "snippentInterface": "async-await"
         },
