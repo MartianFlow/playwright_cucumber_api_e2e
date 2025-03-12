@@ -46,7 +46,7 @@ jobs:
       - name: Checkout linter rules
         uses: actions/checkout@v3
         with:
-          repository: MartianFlow/qa-assessment
+          repository: ${{ github.event.repository.name }}
           ref: ${{ fromJson(steps.version_rules.outputs.data).referenced_workflows[0].sha }}
           token: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
           persist-credentials: false
