@@ -1,0 +1,103 @@
+name: requirements
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+# env:
+#   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+jobs:
+  security-checks:
+    runs-on: ubuntu-latest
+    steps:
+      #Clonacion y checkeo del proyecto
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      #Analisis de informacion sensible
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@v3.67.5
+        with:
+          extra_args: --only-verified
+  lint:
+    name: Linter Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Run ESLint
+        run: pnpm exec eslint . --ext .ts,.tsx --max-warnings=0
+
+#   sonarcloud:
+#     name: SonarCloud Analysis
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#       - uses: pnpm/action-setup@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: 'pnpm'
+#       - run: pnpm install --frozen-lockfile
+#       - name: Run SonarCloud Analysis
+#         uses: SonarSource/sonarcloud-github-action@master
+#         env:
+#           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         with:
+#           args: >
+#             -Dsonar.organization=your-org
+#             -Dsonar.projectKey=your-project
+#             -Dsonar.sources=src
+#             -Dsonar.exclusions=**/node_modules/**,**/*.test.ts
+#             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+#             -Dsonar.typescript.tsconfigPath=tsconfig.json
+
+#   security:
+#     name: Security Checks (OWASP)
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - name: Run OWASP Dependency Check
+#         uses: dependency-check/Dependency-Check_Action@main
+#         with:
+#           project: "Playwright Security Scan"
+#           scanpath: "."
+#           format: "HTML"
+#           outdir: "./reports"
+#       - name: Upload OWASP Report
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: security-report
+#           path: ./reports
+
+#   typecheck:
+#     name: TypeScript Type Check
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: pnpm/action-setup@v4
+#       - uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+#           cache: 'pnpm'
+#       - run: pnpm install --frozen-lockfile
+#       - name: Run TypeScript Type Check
+#         run: pnpm exec tsc --noEmit
