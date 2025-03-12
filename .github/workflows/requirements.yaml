@@ -30,19 +30,38 @@ jobs:
         uses: trufflesecurity/trufflehog@v3.67.5
         with:
           extra_args: --only-verified
+
   lint:
-    name: Linter Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set version to download rules
+        id: version_rules
+        uses: octokit/request-action@v2.x
         with:
-          node-version: 20
-          cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - name: Run ESLint
-        run: pnpm exec eslint . --ext .ts,.tsx --max-warnings=0
+          route: GET /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout linter rules
+        uses: actions/checkout@v3
+        with:
+          repository: MartianFlow/qa-assessment
+          ref: ${{ fromJson(steps.version_rules.outputs.data).referenced_workflows[0].sha }}
+          token: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
+          persist-credentials: false
+          path: ./templates_linters
+          sparse-checkout: |
+            .github/linters
+      - name: Lint Code Base
+        uses: oxsecurity/megalinter@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IGNORE_GITIGNORED_FILES: true
+          GIT_AUTHORIZATION_BEARER: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
+          LINTER_RULES_PATH: './templates_linters/.github/linters'
+          DISABLE_ERRORS_LINTERS: 'ENV_DOTENV_LINTER,JSON_ESLINT_PLUGIN_JSONC,XML_XMLLINT,ACTION_ACTIONLINT,GHERKIN_GHERKIN_LINT'
+          ENABLE_LINTERS: 'TYPESCRIPT_ESLINT'
 
 #   sonarcloud:
 #     name: SonarCloud Analysis
