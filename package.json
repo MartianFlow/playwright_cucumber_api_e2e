@@ -9,7 +9,6 @@
     "uploadXray": "npx ts-node src/test/Helper/uploadToXray.ts",
     "posttest": "npx ts-node src/test/utiles/report.ts && npm run uploadXray",
     "test:failed": "cucumber-js -p rerun @rerun.txt"
-    
   },
   "keywords": [],
   "author": "",
@@ -28,5 +27,6 @@
   "dependencies": {
     "axios": "^1.7.9",
     "fs": "^0.0.1-security"
-  }
+  },
+  "packageManager": "pnpm@10.6.1+sha512.40ee09af407fa9fbb5fbfb8e1cb40fbb74c0af0c3e10e9224d7b53c7658528615b2c92450e74cfad91e3a2dcafe3ce4050d80bda71d757756d2ce2b66213e9a3"
 }
