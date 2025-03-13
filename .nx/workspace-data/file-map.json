@@ -1,0 +1,163 @@
+{
+  "version": "6.0",
+  "nxVersion": "20.5.0",
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".DS_Store",
+        "hash": "2553769723521406170"
+      },
+      {
+        "file": ".github/workflows/requirements.yaml",
+        "hash": "3234105058140588956"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "7627400313413225284"
+      },
+      {
+        "file": ".vscode/easycode.ignore",
+        "hash": "9829580246352173867"
+      },
+      {
+        "file": "@rerun.txt",
+        "hash": "6839799805332381469"
+      },
+      {
+        "file": "README.md",
+        "hash": "8166887253863725563"
+      },
+      {
+        "file": "cucumber.json",
+        "hash": "9592311758086643065"
+      },
+      {
+        "file": "eslint.config.cjs",
+        "hash": "16238184248186060133"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "12153765498105841715"
+      },
+      {
+        "file": "package.json",
+        "hash": "10724439645389661795"
+      },
+      {
+        "file": "playwright.config.ts",
+        "hash": "5807847057221570270"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "17016972065855245753"
+      },
+      {
+        "file": "src/test/Helper/browsers.ts",
+        "hash": "1158869494228232381"
+      },
+      {
+        "file": "src/test/Helper/env/.env.test",
+        "hash": "2439408794250212611"
+      },
+      {
+        "file": "src/test/Helper/env/env.ts",
+        "hash": "4035387735983940162"
+      },
+      {
+        "file": "src/test/Helper/init.ts",
+        "hash": "2023673757231824982"
+      },
+      {
+        "file": "src/test/Helper/types/env.d.ts",
+        "hash": "6992686054807898839"
+      },
+      {
+        "file": "src/test/Helper/uploadToXray.ts",
+        "hash": "10385506907801941539"
+      },
+      {
+        "file": "src/test/api/.auth/user.json",
+        "hash": "16231800650197007716"
+      },
+      {
+        "file": "src/test/api/AuthApi.ts",
+        "hash": "10037611237832226914"
+      },
+      {
+        "file": "src/test/api/CreateArticleApi.ts",
+        "hash": "7514889373309225552"
+      },
+      {
+        "file": "src/test/config/cucumber.js",
+        "hash": "10695850459639495328"
+      },
+      {
+        "file": "src/test/features/auth.feature",
+        "hash": "15949853991846275415"
+      },
+      {
+        "file": "src/test/features/create_article.feature",
+        "hash": "17732117659391122234"
+      },
+      {
+        "file": "src/test/features/login.feature",
+        "hash": "11425170661919837613"
+      },
+      {
+        "file": "src/test/features/loginScenario.feature",
+        "hash": "12976970164981317204"
+      },
+      {
+        "file": "src/test/pageObjects/LoginPage.ts",
+        "hash": "873042842738206783"
+      },
+      {
+        "file": "src/test/pageObjects/NavigatePage.ts",
+        "hash": "17654662910731455297"
+      },
+      {
+        "file": "src/test/steps/authSteps.ts",
+        "hash": "3533206305737954746"
+      },
+      {
+        "file": "src/test/steps/createArticleSteps.ts",
+        "hash": "1934830926075850966"
+      },
+      {
+        "file": "src/test/steps/loginSteps.ts",
+        "hash": "18065526568484598109"
+      },
+      {
+        "file": "src/test/utiles/hooks.ts",
+        "hash": "5107773867152704871"
+      },
+      {
+        "file": "src/test/utiles/logger.ts",
+        "hash": "5658026713500511140"
+      },
+      {
+        "file": "src/test/utiles/pageFixture.ts",
+        "hash": "13127737660734160428"
+      },
+      {
+        "file": "src/test/utiles/report.ts",
+        "hash": "2554993955597549731"
+      },
+      {
+        "file": "test-results/cucumber-report.html",
+        "hash": "16920657470533728414"
+      },
+      {
+        "file": "test-results/cucumber-report.json",
+        "hash": "6850641117184390488"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "7699038145845140718"
+      }
+    ]
+  }
+}

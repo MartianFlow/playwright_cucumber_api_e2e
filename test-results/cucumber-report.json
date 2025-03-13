@@ -1,0 +1,72 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "login-page-validation;login-page-with-valid-username-and-password",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "login page with valid username and password",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "providing valid url for login",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "providing valid email as \"test2@email.com\" and password as \"Tester1225\"",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "clicking login button",
+            "result": {
+              "status": "undefined",
+              "duration": 0
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@JS-1042",
+            "line": 1
+          },
+          {
+            "name": "@smoke",
+            "line": 10
+          },
+          {
+            "name": "@TEST_JS-1001",
+            "line": 10
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "login-page-validation",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "login page validation",
+    "tags": [
+      {
+        "name": "@JS-1042",
+        "line": 1
+      }
+    ],
+    "uri": "src/test/features/login.feature"
+  }
+]

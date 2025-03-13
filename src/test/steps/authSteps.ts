@@ -9,15 +9,14 @@ Given(`the user provides valid API credentials with email {string} and password 
 
 When(`the user sends a login request to the authentication API`, async function () {
     if (!this.accessToken) {
-        throw new Error("Access token was not generated, login failed")
-        console.log("Access token was not generated, login failed")
+        throw new Error('Access token was not generated, login failed');
     }
 });
 
 // Then: Access token should be received
 Then(`the user should receive a valid access token`, async function () {
     if (!this.accessToken) {
-        throw new Error("No access token received");
+        throw new Error('No access token received');
     }
 });
 
