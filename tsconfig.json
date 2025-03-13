@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "resolveJsonModule": true,
-      "esModuleInterop": true,
-      "typeRoots": ["./node_modules/@types", "src/test/Helper/types/env.d.ts"]
-    }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "src/test/Helper/types/env.d.ts"]
+  }
 }
