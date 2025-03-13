@@ -13,6 +13,12 @@ This repository contains an end-to-end (E2E) testing framework built with Playwr
   - [Setup](#setup)
   - [Running Tests](#running-tests)
   - [Reporting](#reporting)
+  - [Enhancing Device Reports in Playwright Cucumber E2E](#enhancing-device-reports-in-playwright-cucumber-e2e)
+    - [1. Playwright Configuration (`playwright.config.ts`)](#1-playwright-configuration-playwrightconfigts)
+    - [2. Report Generation (`src/test/utiles/report.ts` and `test-result/cucumber-report.html`)](#2-report-generation-srctestutilesreportts-and-test-resultcucumber-reporthtml)
+    - [3. Cucumber Hooks (`src/test/utiles/hooks.ts`)](#3-cucumber-hooks-srctestutileshooksts)
+    - [4. Logs (`src/test/utiles/logger.ts`)](#4-logs-srctestutilesloggerts)
+    - [Steps to Improve Your Reports](#steps-to-improve-your-reports)
   - [API Testing](#api-testing)
   - [Page Object Model (POM)](#page-object-model-pom)
   - [Configuration](#configuration)
@@ -122,6 +128,89 @@ jorgeo452-playwright_cucumber_e2e/
 ## Reporting
 
 After running the tests, an HTML report will be generated in the `test-result` directory. Open `cucumber-report.html` to view the report.
+
+## Enhancing Device Reports in Playwright Cucumber E2E
+
+To obtain more detailed reports about the devices used in your tests, you can modify various aspects of your configuration and code. Here's how:
+
+### 1. Playwright Configuration (`playwright.config.ts`)
+
+This file defines the browsers and devices that Playwright will use to run your tests.
+
+* **Projects and Devices:**
+    * The `projects` section is where you configure browsers and devices.
+    * You can add or modify existing devices to better reflect your testing needs. For example, you can add specific mobile devices or adjust desktop browser configurations.
+    * Example:
+
+    ```typescript
+    import { defineConfig, devices } from '@playwright/test';
+
+    export default defineConfig({
+      projects: [
+        {
+          name: 'chromium',
+          use: { ...devices['Desktop Chrome'] },
+        },
+        {
+          name: 'firefox',
+          use: { ...devices['Desktop Firefox'] },
+        },
+        {
+          name: 'Mobile Chrome',
+          use: { ...devices['Pixel 5'] },
+        },
+      ],
+    });
+    ```
+
+    * If you need to add custom devices, refer to the Playwright documentation to see how to create new devices.
+
+### 2. Report Generation (`src/test/utiles/report.ts` and `test-result/cucumber-report.html`)
+
+This is where your test's HTML report is generated.
+
+* **`src/test/utiles/report.ts`:**
+    * This file contains the code that uses `multiple-cucumber-html-reporter` to generate the report.
+    * You can modify this code to customize the information displayed in the report. For example, you can add columns to show additional device information.
+    * Playwright creates a folder named `test-result` on the root of the project where the reports are saved.
+* **`test-result/cucumber-report.html`:**
+    * This is the generated HTML report.
+    * Playwright includes basic browser and device information in the test results.
+    * If you need more detailed information, you can modify the code in `src/test/utiles/report.ts` to extract and display that information.
+
+### 3. Cucumber Hooks (`src/test/utiles/hooks.ts`)
+
+Hooks allow you to execute code before and after each test scenario.
+
+* **Information Capture:**
+    * You can use the `Before` and `After` hooks to capture runtime environment information, such as browser and device names.
+    * This information can be stored and then added to the reports.
+    * Example:
+
+    ```typescript
+    import { Before, After, ITestCaseHookParameter } from '@cucumber/cucumber';
+    import { pageFixture } from './pageFixture';
+
+    Before(async function (scenario: ITestCaseHookParameter) {
+      const browserName = pageFixture.page.context().browser()?.browserType().name();
+      console.log(`Running scenario: ${scenario.pickle.name} on ${browserName}`);
+    });
+    ```
+
+### 4. Logs (`src/test/utiles/logger.ts`)
+
+This file configures your project's log registration.
+
+* **Information Registration:**
+    * You can add logs to record device information during test execution.
+    * These logs can be useful for debugging and adding additional information to the reports.
+
+### Steps to Improve Your Reports
+
+1.  **Review `playwright.config.ts`:** Ensure that devices are configured correctly and add or modify devices as needed.
+2.  **Modify `src/test/utiles/report.ts`:** Customize the report generation code to display the device information you need.
+3.  **Use `src/test/utiles/hooks.ts`:** Capture additional device information and store it for use in reports.
+4.  **Add logs in `src/test/utiles/logger.ts`:** Record relevant information for debugging and adding to reports.
 
 ## API Testing
 
