@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=playwright_cucumber_e2e&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=playwright_cucumber_e2e)
+
 
 # Playwright Cucumber E2E Test Framework
 
