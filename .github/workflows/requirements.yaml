@@ -1,4 +1,4 @@
-name: requirements
+name: Continuous testing requirements
 
 on:
   push:
@@ -65,7 +65,7 @@ jobs:
       - run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
         with:
-          main-branch-name: 'master'
+          main-branch-name: 'main'
       - run: |
           echo "BASE: ${{ env.NX_BASE }}"
           echo "HEAD: ${{ env.NX_HEAD }}"
@@ -85,24 +85,6 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
-
-#   security:
-#     name: Security Checks (OWASP)
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v4
-#       - name: Run OWASP Dependency Check
-#         uses: dependency-check/Dependency-Check_Action@main
-#         with:
-#           project: "Playwright Security Scan"
-#           scanpath: "."
-#           format: "HTML"
-#           outdir: "./reports"
-#       - name: Upload OWASP Report
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: security-report
-#           path: ./reports
 
 #   typecheck:
 #     name: TypeScript Type Check
