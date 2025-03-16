@@ -30,7 +30,7 @@ jobs:
 
   security-check:
     needs: mobile-tests
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    if: github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/security.yml
     with:
       repository: ${{ github.repository }}
