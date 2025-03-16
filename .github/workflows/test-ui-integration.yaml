@@ -23,7 +23,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install
 
-      - name: Run Playwright Tests
+      - name: Run Playwright Tests & Update XRAY Test Execution
         run: TAGS="@TEST_JS-1001" npm test
 
       - name: Upload Test Results
@@ -32,12 +32,12 @@ jobs:
           name: ui-test-results
           path: test-results/
 
-  # security-check:
-  #   needs: ui-tests
-  #   if: github.event_name == 'workflow_dispatch'
-  #   uses: "./security.yaml"
-  #   with:
-  #     repository: ${{ github.repository }}
-  #     target-url-zap: "https://example.com"
-  #   secrets:
-  #     DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
+  security-check:
+    needs: ui-tests
+    if: github.event_name == 'workflow_dispatch'
+    uses: "./security.yaml"
+    with:
+      repository: ${{ github.repository }}
+      target-url-zap: "https://peopaygo.ocmi-client-portal.com/dashboard"
+    secrets:
+      DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
