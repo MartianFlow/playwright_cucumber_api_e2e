@@ -20,6 +20,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
 
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
       - name: Run Playwright Tests
         run: TAGS="@TEST_JS-1001" npm test
 
