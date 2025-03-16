@@ -35,7 +35,7 @@ jobs:
   security-check:
     needs: ui-tests
     if: github.event_name == 'workflow_dispatch'
-    uses: "./security.yaml"
+    uses: ./.github/workflows/security.yaml
     with:
       repository: ${{ github.repository }}
       target-url-zap: "https://peopaygo.ocmi-client-portal.com/dashboard"
