@@ -35,7 +35,7 @@ jobs:
   security-check:
     needs: ui-tests
     if: github.event_name == 'push' || github.event_name == 'pull_request'
-    uses: ./.github/workflows/security.yml
+    uses: "./security.yaml"
     with:
       repository: ${{ github.repository }}
       target-url-zap: "https://example.com"
