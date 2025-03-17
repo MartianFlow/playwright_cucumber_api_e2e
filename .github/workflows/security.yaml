@@ -57,6 +57,15 @@ jobs:
           persist-credentials: false
           path: ./${{ inputs.repository }}
 
+      - name: Verify APK File
+        run: |
+          if [ ! -f "${{ inputs.path-app }}" ]; then
+            echo "ERROR: APK file not found at ${{ inputs.path-app }}"
+            exit 1
+          else
+            echo "APK file found: ${{ inputs.path-app }}"
+          fi
+
       - name: Run MobSF Scan
         if: ${{ inputs.path-app != '' }}
         env:
