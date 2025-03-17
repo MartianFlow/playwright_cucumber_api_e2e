@@ -56,16 +56,21 @@ jobs:
           token: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
           persist-credentials: false
           path: ./${{ inputs.repository }}
+          fetch-depth: 0
 
       - name: Verify APK File
+        if: ${{ inputs.path-app != '' }}
         run: |
+          echo "Verificando existencia del APK en: ${{ inputs.path-app }}"
           if [ ! -f "${{ inputs.path-app }}" ]; then
-            echo "ERROR: APK file not found at ${{ inputs.path-app }}"
+            echo "❌ ERROR: APK file not found at ${{ inputs.path-app }}"
+            echo "📂 Contenido de src/test/mobile/apk:"
+            ls -R src/test/mobile/apk || echo "❌ No existe el directorio src/test/mobile/apk"
             exit 1
           else
-            echo "APK file found: ${{ inputs.path-app }}"
+            echo "✅ APK file found: ${{ inputs.path-app }}"
           fi
-
+          
       - name: Run MobSF Scan
         if: ${{ inputs.path-app != '' }}
         env:
