@@ -72,6 +72,10 @@ jobs:
             echo "✅ APK file found: ${{ inputs.path-app }}"
           fi
 
+      - name: Enable Git LFS
+        run: git lfs install --local
+
+
       - name: Run MobSF Scan
         if: ${{ inputs.path-app != '' }}
         env:
