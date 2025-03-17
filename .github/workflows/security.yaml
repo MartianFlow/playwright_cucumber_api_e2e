@@ -64,10 +64,29 @@ jobs:
           OUTPUT_FILE_NAME: "mobsf_report.json"
         run: |
           echo "Starting MobSF Security Scan for $INPUT_APP_NAME"
-          docker run --rm -v $(pwd):/root/.MobSF/uploads \
-            opensecurity/mobile-security-framework-mobsf:latest \
-            python3 manage.py scan --file /root/.MobSF/uploads/${INPUT_APP_NAME} \
-            --output json > ${OUTPUT_FILE_NAME}
+          docker run --rm -d -p 8000:8000 --name mobsf opensecurity/mobile-security-framework-mobsf:latest
+          
+          echo "Waiting for MobSF to start..."
+          sleep 20
+          
+          echo "Uploading APK to MobSF..."
+          UPLOAD_RESPONSE=$(curl -X POST "http://localhost:8000/api/v1/upload" \
+            -H "Authorization: mobsf_api_key" \
+            -F "file=@${INPUT_APP_NAME}")
+
+          HASH=$(echo $UPLOAD_RESPONSE | jq -r '.hash')
+          
+          echo "Running analysis..."
+          curl -X POST "http://localhost:8000/api/v1/analyze" \
+            -H "Authorization: mobsf_api_key" \
+            -H "Content-Type: application/json" \
+            -d "{\"hash\":\"$HASH\"}"
+
+          echo "Downloading report..."
+          curl -X POST "http://localhost:8000/api/v1/download_pdf" \
+            -H "Authorization: mobsf_api_key" \
+            -H "Content-Type: application/json" \
+            -d "{\"hash\":\"$HASH\"}" -o "${OUTPUT_FILE_NAME}"
 
       - name: Upload MobSF Report
         if: ${{ inputs.path-app != '' }}
