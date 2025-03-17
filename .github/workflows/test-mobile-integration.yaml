@@ -40,6 +40,6 @@ jobs:
     uses: ./.github/workflows/security.yaml
     with:
       repository: ${{ github.repository }}
-      path-app: "app-release.apk"
+      path-app: "src/test/mobile/apk/app-release.apk"
     secrets:
       DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
