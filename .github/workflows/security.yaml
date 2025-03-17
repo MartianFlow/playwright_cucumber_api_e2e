@@ -59,10 +59,15 @@ jobs:
 
       - name: Run MobSF Scan
         if: ${{ inputs.path-app != '' }}
-        uses: ./.github/actions/bbog-dig-cat-action-mobsf-pipeline
-        with:
+        env:
           INPUT_APP_NAME: ${{ inputs.repository }}/${{ inputs.path-app }}
-          OUTPUT_FILE_NAME: report_json.json
+          OUTPUT_FILE_NAME: "mobsf_report.json"
+        run: |
+          echo "Starting MobSF Security Scan for $INPUT_APP_NAME"
+          docker run --rm -v $(pwd):/root/.MobSF/uploads \
+            opensecurity/mobile-security-framework-mobsf:latest \
+            python3 manage.py scan --file /root/.MobSF/uploads/${INPUT_APP_NAME} \
+            --output json > ${OUTPUT_FILE_NAME}
 
       - name: Upload MobSF Report
         if: ${{ inputs.path-app != '' }}
