@@ -57,6 +57,7 @@ jobs:
           persist-credentials: false
           path: ./${{ inputs.repository }}
           fetch-depth: 0
+          lfs: true  
 
       - name: Verify APK File
         if: ${{ inputs.path-app != '' }}
@@ -70,35 +71,36 @@ jobs:
           else
             echo "✅ APK file found: ${{ inputs.path-app }}"
           fi
-          
+
       - name: Run MobSF Scan
         if: ${{ inputs.path-app != '' }}
         env:
-          INPUT_APP_NAME: ${{ inputs.repository }}/${{ inputs.path-app }}
+          INPUT_APP_NAME: "src/test/mobile/apk/app-release.apk"
           OUTPUT_FILE_NAME: "mobsf_report.json"
         run: |
-          echo "Starting MobSF Security Scan for $INPUT_APP_NAME"
+          echo "🚀 Iniciando MobSF Security Scan para: $INPUT_APP_NAME"
+
           docker run --rm -d -p 8000:8000 --name mobsf \
-            -v $(pwd)/${{ inputs.path-app }}:/root/.MobSF/uploads/app.apk \
+            -v $(pwd)/src/test/mobile/apk/app-release.apk:/root/.MobSF/uploads/app.apk \
             opensecurity/mobile-security-framework-mobsf:latest
           
-          echo "Waiting for MobSF to start..."
+          echo "⏳ Esperando 20 segundos para que MobSF inicie..."
           sleep 20
           
-          echo "Uploading APK to MobSF..."
+          echo "⬆️ Subiendo APK a MobSF..."
           UPLOAD_RESPONSE=$(curl -X POST "http://localhost:8000/api/v1/upload" \
             -H "Authorization: mobsf_api_key" \
-            -F "file=@./${{ inputs.path-app }}"
+            -F "file=@/root/.MobSF/uploads/app.apk")
 
           HASH=$(echo $UPLOAD_RESPONSE | jq -r '.hash')
-          
-          echo "Running analysis..."
+
+          echo "🛠️ Ejecutando análisis en MobSF..."
           curl -X POST "http://localhost:8000/api/v1/analyze" \
             -H "Authorization: mobsf_api_key" \
             -H "Content-Type: application/json" \
             -d "{\"hash\":\"$HASH\"}"
 
-          echo "Downloading report..."
+          echo "📄 Descargando reporte..."
           curl -X POST "http://localhost:8000/api/v1/download_pdf" \
             -H "Authorization: mobsf_api_key" \
             -H "Content-Type: application/json" \
