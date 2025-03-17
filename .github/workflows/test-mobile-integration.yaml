@@ -3,6 +3,10 @@ name: Mobile Testing Pipeline
 on:
   workflow_dispatch:
 
+permissions: 
+  id-token: write
+  contents: read
+
 jobs:
   mobile-tests:
     runs-on: ubuntu-latest
@@ -19,10 +23,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
-
-      - name: Install Playwright Browsers
-        run: npx playwright install
+        run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
 
     #   - name: Run Mobile Tests
     #     run: npm run test:mobile
@@ -33,12 +34,12 @@ jobs:
           name: mobile-test-results
           path: test-results/
 
-  # security-check:
-  #   needs: mobile-tests
-  #   if: github.event_name == 'workflow_dispatch'
-  #   uses: "./security.yaml"
-  #   with:
-  #     repository: ${{ github.repository }}
-  #     path-app: "app-release.apk"
-  #   secrets:
-  #     DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
+  security-check:
+    needs: mobile-tests
+    if: github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/security.yaml
+    with:
+      repository: ${{ github.repository }}
+      path-app: "app-release.apk"
+    secrets:
+      DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
