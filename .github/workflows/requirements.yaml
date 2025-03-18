@@ -37,15 +37,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Install PNPM
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-
-      - name: Install PNPM
-        uses: pnpm/action-setup@v4
-
+          
       - name: Cache Dependencies
         id: cache-pnpm
         uses: actions/cache@v3
