@@ -3,7 +3,10 @@ import axios from "axios";
 import dotenv from "dotenv";
 import path from "path";
 
-const REPORT_PATH = path.resolve(__dirname, "../../../test-result/cucumber-report.json");
+const REPORT_PATH = path.resolve(
+  __dirname,
+  "../../../test-result/cucumber-report.json"
+);
 
 dotenv.config({ path: path.resolve(__dirname, "../Helper/env/.env.test") }); // Load environment variables from `.env`.
 
@@ -11,7 +14,9 @@ const XRAY_CLIENT_ID = process.env.XRAY_CLIENT_ID;
 const XRAY_CLIENT_SECRET = process.env.XRAY_CLIENT_SECRET;
 
 if (!XRAY_CLIENT_ID || !XRAY_CLIENT_SECRET) {
-  console.error("ERROR: Xray credentials are not configured in the environment variables");
+  console.error(
+    "ERROR: Xray credentials are not configured in the environment variables"
+  );
   process.exit(1);
 }
 
@@ -31,7 +36,10 @@ async function authenticateXray(): Promise<string> {
     return response.data; // Return the authentication token.
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.error("Error authenticating in Xray: ", error.response?.data || error.message);
+      console.error(
+        "Error authenticating in Xray: ",
+        error.response?.data || error.message
+      );
     } else if (error instanceof Error) {
       console.error("Unknown error: ", error.message);
     } else {
@@ -39,7 +47,6 @@ async function authenticateXray(): Promise<string> {
     }
     process.exit(1);
   }
-  
 }
 
 async function uploadResultsToXray(token: string): Promise<void> {
@@ -65,7 +72,10 @@ async function uploadResultsToXray(token: string): Promise<void> {
     console.log("Report successfully uploaded to Xray: ", response.data);
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
-      console.error("Error uploading the report to Xray: ", error.response?.data || error.message);
+      console.error(
+        "Error uploading the report to Xray: ",
+        error.response?.data || error.message
+      );
     } else if (error instanceof Error) {
       console.error("Unknown error: ", error.message);
     } else {
