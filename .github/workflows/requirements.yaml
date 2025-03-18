@@ -27,13 +27,30 @@ jobs:
             echo "should-skip=false" >> $GITHUB_OUTPUT
           fi
 
-  setup:
-    name: Setup Environment
+
+  security-checks:
     runs-on: ubuntu-latest
-    outputs:
-      pnpm-cache-hit: ${{ steps.cache-pnpm.outputs.cache-hit }}
+    steps:
+      #Clonacion y checkeo del proyecto
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      #Analisis de informacion sensible
+      - name: TruffleHog OSS
+        uses: trufflesecurity/trufflehog@v3.67.5
+        with:
+          extra_args: --only-verified
+
+  lint:
+    needs: check-skip
+    if: needs.check-skip.outputs.should-skip != 'true'
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: pnpm/action-setup@v4
 
@@ -42,77 +59,40 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Cache Dependencies
-        id: cache-pnpm
-        uses: actions/cache@v3
+      - run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
+      - uses: nrwl/nx-set-shas@v4
         with:
-          path: ~/.pnpm-store
-          key: pnpm-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-${{ runner.os }}-
+          main-branch-name: 'main'
+      - run: |
+          echo "BASE: ${{ env.NX_BASE }}"
+          echo "HEAD: ${{ env.NX_HEAD }}"
 
-      - name: Install Dependencies
-        if: steps.cache-pnpm.outputs.cache-hit != 'true'
-        run: pnpm install --frozen-lockfile
+      - run: git branch -a
 
-      - name: Export pnpm path
-        run: echo "PNPM_HOME=$(pnpm root -g)/bin" >> $GITHUB_ENV
-
-  security-checks:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Scan for Secrets (TruffleHog)
-        uses: trufflesecurity/trufflehog@v3.67.5
-        with:
-          extra_args: --only-verified
-
-      - name: Security Dependency Check
-        uses: dependency-check/Dependency-Check_Action@main
-        with:
-          project: "Security Analysis"
-          scanpath: "."
-          format: "HTML"
-          outdir: "./reports"
-
-      - name: Upload Security Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: security-report
-          path: ./reports
-
-  lint:
-    needs: [setup, check-skip]
-    if: needs.check-skip.outputs.should-skip != 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: pnpm/action-setup@v4
-
-      - name: Run ESLint
-        run: pnpm exec eslint --config eslint.config.cjs
+      - run: pnpm exec eslint --config eslint.config.cjs 
 
   sonarqube:
-    needs: setup
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-
+          fetch-depth: 0 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
 
   typecheck:
-    needs: setup
     name: TypeScript Type Check
     runs-on: ubuntu-latest
     steps:
-      - name: Ensure pnpm is available
-        run: |
-          echo "Using pnpm from: $PNPM_HOME"
-
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
       - name: Run TypeScript Type Check
         run: pnpm exec tsc --noEmit
