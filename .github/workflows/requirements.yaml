@@ -39,8 +39,6 @@ jobs:
 
       - name: Install PNPM
         uses: pnpm/action-setup@v4
-        with:
-          version: 8
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -91,6 +89,8 @@ jobs:
     if: needs.check-skip.outputs.should-skip != 'true'
     runs-on: ubuntu-latest
     steps:
+      - uses: pnpm/action-setup@v4
+
       - name: Run ESLint
         run: pnpm exec eslint --config eslint.config.cjs
 
@@ -99,6 +99,10 @@ jobs:
     name: SonarQube
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v5
         env:
@@ -108,6 +112,8 @@ jobs:
     needs: setup
     name: TypeScript Type Check
     runs-on: ubuntu-latest
-    steps:
+    steps:    
+      - uses: pnpm/action-setup@v4
+
       - name: Run TypeScript Type Check
         run: pnpm exec tsc --noEmit
