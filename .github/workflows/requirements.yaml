@@ -31,23 +31,19 @@ jobs:
     name: Setup Environment
     runs-on: ubuntu-latest
     outputs:
-      pnpm-cache-key: ${{ steps.cache-pnpm.outputs.cache-hit }}
+      pnpm-cache-hit: ${{ steps.cache-pnpm.outputs.cache-hit }}
     steps:
       - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
         with:
-          fetch-depth: 0
+          version: 8  # Asegura que pnpm se instala correctamente
 
-      - name: Install PNPM
-        uses: pnpm/action-setup@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
 
-      - uses: pnpm/action-setup@v4
-          
       - name: Cache Dependencies
         id: cache-pnpm
         uses: actions/cache@v3
@@ -59,7 +55,10 @@ jobs:
 
       - name: Install Dependencies
         if: steps.cache-pnpm.outputs.cache-hit != 'true'
-        run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
+        run: pnpm install --frozen-lockfile
+
+      - name: Export pnpm path
+        run: echo "PNPM_HOME=$(pnpm root -g)/bin" >> $GITHUB_ENV
 
   security-checks:
     needs: setup
@@ -112,10 +111,10 @@ jobs:
     needs: setup
     name: TypeScript Type Check
     runs-on: ubuntu-latest
-    steps:    
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 8
+    steps:
+      - name: Ensure pnpm is available
+        run: |
+          echo "Using pnpm from: $PNPM_HOME"
 
       - name: Run TypeScript Type Check
         run: pnpm exec tsc --noEmit
