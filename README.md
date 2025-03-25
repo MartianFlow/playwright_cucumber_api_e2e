@@ -41,7 +41,7 @@ jorgeo452-playwright_cucumber_e2e/
 │       │   ├── init.ts            # Test setup (e.g., directory cleanup)
 │       │   ├── uploadToXray.ts    # Uploads test results to Xray
 │       │   ├── env/
-│       │   │   ├── env.ts          # Environment variable loading
+│       │   │   ├── envPath.ts          # Environment variable loading
 │       │   │   └── .env.test      # Test environment variables
 │       │   └── types/
 │       │       └── env.d.ts       # TypeScript definitions for environment variables
