@@ -16,8 +16,5 @@ test-result/
 .vscode/
 .DS_Store
 
-# Lock files
-package-lock.json
-
 # NX cache
 .nx/
