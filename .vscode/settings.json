@@ -1,0 +1,14 @@
+{
+    "cucumberautocomplete.steps": [
+      "src/test/steps/**/*.ts"
+    ],
+    "cucumberautocomplete.syncfeatures": "src/test/features/**/*.feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.snippetsPrefix": ["Given", "When", "Then"],
+    "editor.quickSuggestions": {
+      "comments": false,
+      "strings": true,
+      "other": true
+    }
+  }

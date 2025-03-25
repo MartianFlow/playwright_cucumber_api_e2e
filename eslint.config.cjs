@@ -6,10 +6,16 @@ const tsParser = require("@typescript-eslint/parser");
 module.exports = [
   js.configs.recommended,
   {
-    files: ["**/*.ts", "**/*.tsx"], // Asegura que se analicen los archivos .ts y .tsx
+    files: ["**/*.ts", "**/*.tsx"], // forma de asegurar que se analicen los archivos .ts y .tsx
     languageOptions: {
       parser: tsParser,
-      sourceType: "module"
+      sourceType: "module",
+      globals: {
+        ...js.configs.recommended.languageOptions.globals,
+        console: "readonly",
+        process: "readonly",
+        __dirname: "readonly"
+      }
     },
     plugins: {
       "@typescript-eslint": ts
