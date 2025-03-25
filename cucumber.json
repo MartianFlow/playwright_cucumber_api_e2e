@@ -4,13 +4,13 @@
             "snippentInterface": "async-await"
         },
         "paths":[
-            "src/test/features/*.feature"
+            "src/test/features/**/*.feature"
         ],
         "publishQuite": true,
         "dryRun": false,
         "require":[
-            "src/test/steps/*.ts",
-            "src/test/utiles/*.ts"
+            "src/test/steps/**/*.ts",
+            "src/test/utils/*.ts"
         ],
         "requireModule":[
             "ts-node/register"
@@ -29,8 +29,8 @@
         "publishQuite": true,
         "dryRun": false,
         "require":[
-            "src/test/steps/*.ts",
-            "src/test/utiles/*.ts"
+            "src/test/steps/**/*.ts",
+            "src/test/utils/*.ts"
         ],
         "requireModule":[
             "ts-node/register"

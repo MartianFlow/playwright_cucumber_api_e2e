@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pretest": "npx ts-node src/test/Helper/init.ts",
+    "pretest": "npx ts-node src/test/helper/init.ts",
     "test": "cross-env ENV=test cucumber-js --tags \"${TAGS:-@default}\" || true",
-    "uploadXray": "npx ts-node src/test/Helper/uploadToXray.ts",
-    "posttest": "npx ts-node src/test/utiles/report.ts && npm run uploadXray",
+    "uploadXray": "npx ts-node src/test/helper/uploadToXray.ts",
+    "posttest": "npm run uploadXray",
     "test:failed": "cucumber-js -p rerun @rerun.txt"
   },
   "keywords": [],
@@ -19,6 +19,8 @@
     "@nx/eslint-plugin": "^20.5.0",
     "@nx/workspace": "^20.5.0",
     "@playwright/test": "^1.49.1",
+    "@types/cucumber": "^6.0.1",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.14.10",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^8.26.1",
