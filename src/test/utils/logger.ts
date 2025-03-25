@@ -2,7 +2,7 @@ import { Logger, transports, format } from 'winston';
 
 export const loggerFixture = {
   logger: undefined as Logger
-}
+};
 
 export function options(scenarioName: string) {
   return {
