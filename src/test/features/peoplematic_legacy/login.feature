@@ -1,6 +1,6 @@
 Feature: Login API
 
-  @peoplematic
+  @peoplematic @ApisRegression
   Scenario: Successful login with valid credentials
     Given I send a login request
     Then the response status should be 200
