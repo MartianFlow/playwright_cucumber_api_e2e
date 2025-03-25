@@ -31,13 +31,11 @@ jobs:
   security-checks:
     runs-on: ubuntu-latest
     steps:
-      #Clonacion y checkeo del proyecto
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-      #Analisis de informacion sensible
       - name: TruffleHog OSS
         uses: trufflesecurity/trufflehog@v3.67.5
         with:

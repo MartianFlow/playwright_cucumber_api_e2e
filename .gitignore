@@ -1,6 +1,23 @@
-node_modules/
-/test-result/
-/test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Logs & results
+*.log
+test-result/
+@rerun.txt
+
+# IDEs
+.vscode/
+.DS_Store
+
+# Lock files
+package-lock.json
+
+# NX cache
+.nx/
