@@ -6,12 +6,11 @@ const tsParser = require("@typescript-eslint/parser");
 module.exports = [
   js.configs.recommended,
   {
-    files: ["**/*.ts", "**/*.tsx"], // forma de asegurar que se analicen los archivos .ts y .tsx
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parser: tsParser,
       sourceType: "module",
       globals: {
-        ...js.configs.recommended.languageOptions.globals,
         console: "readonly",
         process: "readonly",
         __dirname: "readonly"
@@ -23,7 +22,7 @@ module.exports = [
     rules: {
       "semi": ["error", "always"],
       "quotes": ["error", "single", { "allowTemplateLiterals": true }],
-      "no-console": "warn"
+      "no-console": "off"
     }
   }
 ];

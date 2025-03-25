@@ -2,7 +2,7 @@ import { request, APIRequestContext } from '@playwright/test';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-import {loggerFixture} from "../../utils/logger";
+import {loggerFixture} from '../../utils/logger';
 
 let apiContext: APIRequestContext;
 dotenv.config({ path: '.env.test' });

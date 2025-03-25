@@ -1,7 +1,7 @@
-import { request, expect } from '@playwright/test';
-import { Given, When, Then } from '@cucumber/cucumber';
-import {loggerFixture} from "../../utils/logger";
-import {getAuthenticatedContext, getLoginApiContext} from "../../helper/peoplematic_legacy/apiContext";
+import { expect } from '@playwright/test';
+import { Given, Then } from '@cucumber/cucumber';
+import {loggerFixture} from '../../utils/logger';
+import { getLoginApiContext} from '../../helper/peoplematic_legacy/apiContext';
 
 let response: any;
 
