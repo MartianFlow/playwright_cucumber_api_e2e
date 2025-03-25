@@ -30,6 +30,12 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile --prefer-offline --ignore-scripts
 
+      - name: Create .env.test from secrets
+        run: |
+          echo "XRAY_CLIENT_ID=${{ secrets.XRAY_CLIENT_ID }}" >> .env.test
+          echo "XRAY_CLIENT_SECRET=${{ secrets.XRAY_CLIENT_SECRET }}" >> .env.test
+          echo "APPLICATION_TOKEN=${{ secrets.APPLICATION_TOKEN }}" >> .env.test
+
       - name: Run Playwright Tests & Update XRAY Test Execution
         run: TAGS=${{ github.event.inputs.cucumber-tag }} npm test
 

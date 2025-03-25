@@ -2,13 +2,14 @@ import fs from 'fs';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import path from 'path';
+import {getEnvPath} from './env/envPath';
 
 const REPORT_PATH = path.resolve(
   __dirname,
   '../../../test-result/cucumber-report.json'
 );
 
-dotenv.config({ path: path.resolve(__dirname, '../helper/env/.env.test') }); // Load environment variables from `.env`.
+dotenv.config({ path: getEnvPath() });
 
 const XRAY_CLIENT_ID = process.env.XRAY_CLIENT_ID;
 const XRAY_CLIENT_SECRET = process.env.XRAY_CLIENT_SECRET;

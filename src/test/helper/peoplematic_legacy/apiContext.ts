@@ -1,15 +1,14 @@
 import { request, APIRequestContext } from '@playwright/test';
 import dotenv from 'dotenv';
 import fs from 'fs';
-import path from 'path';
 import {loggerFixture} from '../../utils/logger';
+import {getEnvPath} from '../env/envPath';
 
 let apiContext: APIRequestContext;
-dotenv.config({ path: '.env.test' });
-const envPath = path.join(__dirname, '../env/.env.test');
+dotenv.config({ path: getEnvPath() });
 
-// Función para actualizar o agregar variables en .env
-function updateEnvVariable(key: string, value: string, envPath: string) {
+// add or update varibles in .env file
+function updateEnvVariable(key: string, value: string, envPath: string = getEnvPath()) {
     let envContent = '';
 
     if (fs.existsSync(envPath)) {
@@ -32,7 +31,7 @@ function updateEnvVariable(key: string, value: string, envPath: string) {
     }
 
     fs.writeFileSync(envPath, updatedLines.join('\n'), { encoding: 'utf-8' });
-    loggerFixture.logger.info('LOGIN_ACCESS_TOKEN added successfully to .env.test');
+    loggerFixture.logger.info(`${key} added/updated successfully in ${envPath}`);
 }
 
 
@@ -43,7 +42,7 @@ export async function getLoginApiContext(): Promise<APIRequestContext> {
             baseURL: 'https://peoplematic.wym.services',
             extraHTTPHeaders: {
                 Accept: 'application/json',
-                'X-Application-Token': '1|I9lHFqPMAT0YdtO1b5PSsLuisRQk81A2PGS5ccUt'
+                'X-Application-Token': process.env.APPLICATION_TOKEN,
             },
         });
     }
@@ -67,8 +66,8 @@ export async function getAuthenticatedContext(): Promise<APIRequestContext> {
         const body = await loginResponse.json();
         const token = body.access_token;
 
-        // Guardar token en .env.test sin borrar las otras variables
-        updateEnvVariable('LOGIN_ACCESS_TOKEN', token, envPath);
+        // Save token in .env without deleting others variables
+        updateEnvVariable('LOGIN_ACCESS_TOKEN', token);
     }
 
     return await request.newContext({

@@ -6,7 +6,7 @@ import { getLoginApiContext} from '../../helper/peoplematic_legacy/apiContext';
 let response: any;
 
 
-Given('I send a login request', async () => {
+Given('I send a login request with a valid user', async () => {
     const api = await getLoginApiContext();
     loggerFixture.logger.info('send request POST to endpoint /auth/login');
 
